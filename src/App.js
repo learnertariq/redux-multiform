@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Form from "./components/Form";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Page1 from "./components/Page1";
 import Page2 from "./components/Page2";

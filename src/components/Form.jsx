@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addData } from "../Store/formSlice";
 import { Link } from "react-router-dom";
 import Alert from "./Alert";
@@ -27,13 +27,13 @@ const Form = ({ title = "Title", onGetRoute }) => {
     setData(dataCopy);
 
     const errorCopy = { ...error };
-    if (target.name == "name") {
+    if (target.name === "name") {
       if (target.value.length < 3)
         errorCopy.name = "name Must be more than 3 chars";
       else errorCopy.name = "";
     }
 
-    if (target.name == "age") {
+    if (target.name === "age") {
       if (parseInt(target.value) <= 0)
         errorCopy.age = "age Must be a positive number and greater than zero";
       else errorCopy.age = "";
