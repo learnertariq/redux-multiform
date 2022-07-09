@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addData } from "../Store/formSlice";
 import { Link } from "react-router-dom";
 import Alert from "./Alert";
 
 const Form = ({ title = "Title", onGetRoute }) => {
+  const dispatch = useDispatch();
   const [data, setData] = useState({ name: "", age: "" });
   const [error, setError] = useState({
     name: "Input name",
     age: "Input age",
   });
   const [disabled, setDisabled] = useState("btn-disabled");
+
+  useEffect(() => {
+    const isDisabled = () => (error.name || error.age ? "btn-disabled" : "");
+    setDisabled(isDisabled());
+  }, [error]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -34,10 +42,9 @@ const Form = ({ title = "Title", onGetRoute }) => {
     setError(errorCopy);
   };
 
-  useEffect(() => {
-    const isDisabled = () => (error.name || error.age ? "btn-disabled" : "");
-    setDisabled(isDisabled());
-  }, [error]);
+  const handleSubmit = () => {
+    dispatch(addData(data));
+  };
 
   return (
     <div className="container mx-auto">
@@ -74,6 +81,7 @@ const Form = ({ title = "Title", onGetRoute }) => {
         </div>
         <div className="mt-8">
           <Link
+            onClick={handleSubmit}
             to={onGetRoute()}
             type="submit"
             className={`btn btn-success btn-outline btn-wide font-bold text-2xl ${disabled}`}
