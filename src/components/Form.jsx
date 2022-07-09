@@ -1,7 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Alert from "./Alert";
 
 const Form = ({ title = "Title", onGetRoute }) => {
+  const [data, setData] = useState({ name: "", age: "" });
+  const [error, setError] = useState({
+    name: "Input name",
+    age: "Input age",
+  });
+  const [disabled, setDisabled] = useState("btn-disabled");
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const target = e.target;
+
+    const dataCopy = { ...data };
+    dataCopy[target.name] = target.value;
+    setData(dataCopy);
+
+    const errorCopy = { ...error };
+    if (target.name == "name") {
+      if (target.value.length < 3)
+        errorCopy.name = "name Must be more than 3 chars";
+      else errorCopy.name = "";
+    }
+
+    if (target.name == "age") {
+      if (parseInt(target.value) <= 0)
+        errorCopy.age = "age Must be a positive number and greater than zero";
+      else errorCopy.age = "";
+    }
+
+    setError(errorCopy);
+  };
+
+  useEffect(() => {
+    const isDisabled = () => (error.name || error.age ? "btn-disabled" : "");
+    setDisabled(isDisabled());
+  }, [error]);
+
   return (
     <div className="container mx-auto">
       <form className="flex flex-col items-center">
@@ -16,23 +53,30 @@ const Form = ({ title = "Title", onGetRoute }) => {
             type="text"
             placeholder="Type here"
             className="input input-bordered input-secondary w-full max-w-xs"
+            onChange={handleChange}
+            name="name"
           />
+          {error.name && <Alert error={error.name} />}
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Age</span>
+            <span className="label-text">Age (Number input)</span>
           </label>
           <input
             type="number"
             placeholder="Type here"
             className="input input-bordered input-secondary w-full max-w-xs"
+            name="age"
+            onChange={handleChange}
           />
+
+          {error.age && <Alert error={error.age} />}
         </div>
         <div className="mt-8">
           <Link
             to={onGetRoute()}
             type="submit"
-            className="btn btn-success btn-outline btn-wide font-bold text-2xl"
+            className={`btn btn-success btn-outline btn-wide font-bold text-2xl ${disabled}`}
           >
             Submit
           </Link>
