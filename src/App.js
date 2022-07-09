@@ -1,12 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import Form from './components/Form';
+import logo from "./logo.svg";
+import "./App.css";
+import Form from "./components/Form";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Page1 from "./components/Page1";
+import Page2 from "./components/Page2";
+import Page3 from "./components/Page3";
+import FinalPage from "./components/FinalPage";
 
 function App() {
   return (
-    <div className='container mx-auto'>
-      <h1 className='text-5xl'>Hello tailwindcss</h1>
-      <Form />
+    <div>
+      <Routes>
+        <Route path="/page1" element={<Page1 />} />
+        <Route path="/page2" element={<Page2 />} />
+        <Route path="/page3" element={<Page3 />} />
+        <Route path="/final" element={<FinalPage />} />
+        <Route path="*" element={<Navigate to="/page1" replace />} />
+      </Routes>
     </div>
   );
 }

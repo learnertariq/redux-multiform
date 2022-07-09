@@ -2,7 +2,8 @@ import React from "react";
 import Form from "./Form";
 
 const Page3 = () => {
-  return <Form title="Three" />;
+  const handleGetRoute = () => "/final";
+  return <Form title="Three" onGetRoute={handleGetRoute} />;
 };
 
 export default Page3;

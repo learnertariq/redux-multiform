@@ -8,17 +8,17 @@ const FinalPage = () => {
   ];
   return (
     <div>
-      {data.map((item) => (
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title">{item.name}</h2>
-            <p>Age: {item.age}</p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">Age: {item.age}</button>
+      <h1 className="text-center text-5xl">Final Data</h1>
+      <div className="flex gap-4 justify-center mt-6">
+        {data.map((item) => (
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body text-center">
+              <h2 className="text-2xl">{item.name}</h2>
+              <p className="text-xl">Age: {item.age}</p>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
