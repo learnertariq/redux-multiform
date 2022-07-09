@@ -6,10 +6,12 @@ import Page1 from "./components/Page1";
 import Page2 from "./components/Page2";
 import Page3 from "./components/Page3";
 import FinalPage from "./components/FinalPage";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route path="/page1" element={<Page1 />} />
         <Route path="/page2" element={<Page2 />} />

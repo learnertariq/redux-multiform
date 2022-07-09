@@ -9,7 +9,7 @@ const FinalPage = () => {
       <h1 className="text-center text-5xl">Final Data</h1>
       <div className="flex gap-4 justify-center mt-6">
         {data.map((item, index) => (
-          <div key={index} class="card bg-base-100 shadow-xl">
+          <div key={index} className="card bg-base-100 shadow-xl">
             <div class="card-body text-center">
               <h2 className="text-2xl">{item.name}</h2>
               <p className="text-xl">Age: {item.age}</p>
